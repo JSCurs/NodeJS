@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <title>Title</title>
+</head>
+<body>
+
+<div>
+    <label for="firstName">
+        <input type="text" value="Test User" id="firstName">
+    </label>
+
+    <label for="lastName">
+        <input type="text" value="Test User" id="lastName">
+    </label>
+
+    <button onclick="sendData()">
+        Send Data
+    </button>
+</div>
+
+<script>
+    function sendData() {
+        var url = "http://127.0.0.1:3000/user";
+
+        var firstName = document.getElementById('firstName').value;
+        var lastName = document.getElementById('lastName').value;
+
+        var xhr = new XMLHttpRequest();
+
+        xhr.onload = function () {
+            console.log(xhr.responseText);
+        };
+
+        xhr.onerror = function () {
+            console.log(xhr.responseText);
+        };
+
+        xhr.open('POST', url);
+
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.send('firstName=' + firstName + '&lastName=' + lastName);
+
+        //        fetch(url, {
+//            method: 'POST',
+//            body  : 'firstName=' + firstName + '&lastName=' + lastName,
+//            //mode  : 'cors'
+//        })
+//            .then(function (response) {
+//                console.log(response.headers.get('Content-Type')); // application/json; charset=utf-8
+//                console.log(response.status);
+//
+//                return response.json();
+//            })
+//            .then(function (data) {
+//                console.log(data);
+//            })
+//            .catch(console.error);
+    }
+</script>
+
+
+</body>
+</html>
